@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "version": "1.0.0",
+
+    "name": "__MSG_extName__",
+    "description": "__MSG_extDescription__",
+    "default_locale": "en",
+
+    "applications": {
+        "gecko": {
+            "id": "GitHub-to-PDF@sienori"
+        }
+    },
+
+    "permissions": ["activeTab"],
+
+    "icons": {
+        "256": "icons/setting.png"
+    },
+
+    "background": {
+        "scripts": ["background.js"]
+    },
+
+    "page_action": {
+        "default_icon": {
+            "256": "icons/setting.png"
+        },
+        "show_matches": ["https://gist.github.com/*"]
+    },
+
+    "content_scripts": [
+        {
+            "js": ["styles.js"],
+            "matches": ["https://gist.github.com/*"]
+        }
+    ]
+}

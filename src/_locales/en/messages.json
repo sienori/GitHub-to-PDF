@@ -1,0 +1,8 @@
+{
+    "extName": {
+        "message": "GitHub to PDF"
+    },
+    "extDescription": {
+        "message": "Convert GitHub Gist contents to PDF by removing unnecessary elements."
+    }
+}
