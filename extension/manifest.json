@@ -19,7 +19,7 @@
     },
 
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["dist/background.js"]
     },
 
     "page_action": {
@@ -31,7 +31,7 @@
 
     "content_scripts": [
         {
-            "js": ["styles.js"],
+            "js": ["dist/content.js"],
             "matches": ["https://gist.github.com/*"]
         }
     ]

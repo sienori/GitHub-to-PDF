@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-class Styles {
+export default class Styles {
     constructor(printElementClassNames, rules) {
         this.stylesheet = document.styleSheets.item(0);
         this.isPrintClassName = 'GitHub-to-PDF-isPrint';
@@ -64,62 +64,3 @@ class Styles {
         this.deleteRules();
     }
 }
-
-function createNewStylesByUrl() {
-    const url = location.href;
-
-    //TODO:ダミー
-    const showTimeline = true;
-    const showHeader = false;
-    const breakPage = false;
-
-    const gist = {
-        pattern: /^https:\/\/gist.github.com\/*/,
-        printElementClassNames: ['file', `${showTimeline? 'discussion-timeline':''}`],
-        rules: [`
-            @media print {
-                body :not(.GitHub-to-PDF-isPrint) {
-                    display:none !important;
-                }
-            }`, `
-            @media print{
-                .file-header {
-                    ${showHeader? '':'display:none !important;'}
-                }
-            }`, `
-            @media print{
-                .file {
-                    ${breakPage? 'page-break-after: always !important;':''}
-                    ${showHeader? '':'border: none !important;'}
-                }
-            }`, `
-            @media print{
-                table {
-                    word-break: break-all !important;
-                }
-            }`, `
-            @media print{
-                .file td span,
-                pre {
-                    overflow-wrap: break-word !important;
-                    white-space: pre-wrap !important;
-                }
-            }`
-        ]
-    };
-
-    if (gist.pattern.test(url)) return new Styles(gist.printElementClassNames, gist.rules);
-}
-
-let styles;
-browser.runtime.onMessage.addListener(request => {
-    switch (request.message) {
-        case 'changeStyle':
-            styles = createNewStylesByUrl();
-            styles.changeStyle();
-            break;
-        case 'undoStyle':
-            styles.undoStyle();
-            break;
-    }
-});
